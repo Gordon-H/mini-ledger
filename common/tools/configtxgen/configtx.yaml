@@ -1,0 +1,35 @@
+Organitions:
+- &OrdererOrg
+  Name: OrdererOrg
+  MSPDir: crypto-config/ordererOrganizations/forchain.com/msp
+- &Org1
+  Name: Org1
+  MSPDir: crypto-config/peerOrganizations/org1.fslj.com/msp
+
+- &Org2
+  Name: Org2
+  MSPDir: crypto-config/peerOrganizations/org1.forchain.com/msp
+
+- &Org3
+  Name: Org3
+  MSPDir: crypto-config/peerOrganizations/org1.mhny.com/msp
+
+Genesis:
+  OrdererType: solo
+  Addresses:
+  - localhost:7701
+  Orderers:
+  - *OrdererOrg
+
+Channels:
+  ChA:
+  - *Org1
+  - *Org2
+  ChB:
+  - *Org2
+  - *Org3
+  ChC:
+  - *Org1
+  - *Org2
+  - *Org3
+
