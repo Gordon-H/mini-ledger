@@ -1,0 +1,12 @@
+syntax = "proto3";
+package protos;
+
+message ChannelCreateTx{
+    string channelName= 1;
+    repeated Organization organizations= 2;
+}
+message Organization{
+    string orgName = 1;
+    bytes mspInfo = 2;
+}
+

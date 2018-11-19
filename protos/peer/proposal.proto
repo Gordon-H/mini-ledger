@@ -1,0 +1,21 @@
+syntax = "proto3";
+package protos;
+
+
+message SignedProposal {
+    bytes signature = 1;
+    Proposal proposal = 2;
+}
+message Proposal {
+    Header header = 1;
+    bytes payload = 2;
+}
+
+enum HeaderType {
+    CHANNEL_CREATE = 0; // Used for messages which express the channel config
+}
+
+
+message Header{
+   HeaderType type = 1;
+}
