@@ -3,6 +3,7 @@ package utils
 import (
 	"github.com/golang/protobuf/proto"
 	"github.com/miniledger/protos/peer"
+	"log"
 )
 
 func MustMarshal(msg proto.Message) []byte {
@@ -17,8 +18,11 @@ func Marshal(msg proto.Message) ([]byte, error) {
 	return proto.Marshal(msg)
 }
 
-func CreateSignedProposal(headerType protos.HeaderType, createTx proto.Message) (protos.Proposal, error) {
-	proto.Marshal(createTx)
-	proposal := protos.Proposal{Header: &protos.Header{Type: headerType}, Payload: []byte{}}
-	return proposal, nil
+func CreateSignedProposal(headerType protos.HeaderType, createTx proto.Message) (protos.SignedProposal, error) {
+	payload, err := proto.Marshal(createTx)
+	if err != nil {
+		log.Fatal("creating signed proposal failed!")
+	}
+	proposal := protos.Proposal{Header: &protos.Header{Type: headerType}, Payload: payload}
+	return protos.SignedProposal{Signature: nil, Proposal: &proposal}, nil
 }

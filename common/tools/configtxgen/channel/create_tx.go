@@ -53,8 +53,8 @@ func createTxFromConfig(txConfig *config.TxConfig) (protos.ChannelCreateTx, erro
 	}
 	tx := protos.ChannelCreateTx{ChannelName: channelName, Organizations: orgs}
 	return tx, nil
-
 }
+
 func loadConfig() (*config.TxConfig, error) {
 	bs, err := ioutil.ReadFile(file)
 	if err != nil {
